@@ -3,10 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Web Page</title>
+  <title>Image Composition</title>
 </head>
 <body>
-  <h1>Hello, GitHub Pages!</h1>
-  <p>This is my first GitHub Pages website!</p>
+  <h1>Image Composition with Canvas</h1>
+  <canvas id="myCanvas" width="500" height="500"></canvas>
+  <script>
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // 배경 이미지
+    const background = new Image();
+    background.src = 'https://resource.df.nexon.com/ui/img/mypage/bg_avatar.png';
+
+    // 앞 이미지 (아이템)
+    const character = new Image();
+    character.src = 'https://avatar.df.nexon.com/charac/prey/de5b78b1bf3a8607a48ef6327f25e8f7/stand.png';
+
+    // 배경 이미지가 로드되면 실행
+    background.onload = function() {
+      ctx.drawImage(background, 0, 0, canvas.width, canvas.height);  // 배경 이미지 그리기
+
+      // 앞 이미지가 로드되면 실행
+      character.onload = function() {
+        ctx.drawImage(character, canvas.width / 4, canvas.height / 4, 200, 200);  // 앞 이미지 그리기
+        ctx.font = '40px Arial';
+        ctx.fillStyle = 'white';
+        ctx.fillText('My Character', 20, 450);  // 텍스트 추가
+      };
+    };
+  </script>
 </body>
 </html>
